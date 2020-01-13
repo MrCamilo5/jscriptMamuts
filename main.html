@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <link rel="shortcut icon" href="fav.ico" type="image/x-icon">
+    <title>Mamuts JS- Experimento</title>
+</head>
+<body>
+    <h1>Simulador de Mamuts</h1>
+    <p>
+        Vector poblacion: <p id='arreglo'></p>
+    </p>
+    <div>
+        <canvas id='chrt'>
+
+        </canvas>
+    </div>
+    <script type="text/javascript">
+    function aleatrioentre(min,max){
+        return Math.floor(Math.random()*(max-min))+min;
+    }
+    var pob=[];
+    var mamuts=[];
+    var t=0;
+    var ano=[];
+    for(i=0;i<1000;i++){
+        mamuts.push(1);
+    }
+    pob.push(mamuts.length);
+    var d, x, l;
+    while(mamuts.length>0){
+        for(x of mamuts){
+            d=aleatrioentre(1,7);
+            if(d==1){
+                mamuts[mamuts.length]=1;
+            }else if(d==2 || d==3){
+                mamuts.pop();
+            }else{}
+        }
+        pob.push(mamuts.length);
+    }
+    for(k of pob){
+        ano.push(t++)
+    }
+    let grafico= document.getElementById('chrt').getContext("2d");
+    var grfico =new Chart(grafico,{
+        type:'line',
+        data:{
+            labels:ano,
+            datasets:[{
+                label:'Cantidad de Mamuts por año',
+                data:pob
+            }]
+        }
+    }) ; 
+    document.getElementById('arreglo').innerHTML=pob;
+    </script>
+</html>
